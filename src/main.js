@@ -1,4 +1,4 @@
-import html2canvas from "html2canvas";
+import * as htmlToImage from "html-to-image";
 import { FILTERS, TEMPLATES, renderTemplate } from "./templates.js";
 import { STICKERS } from "./stickers.js";
 
@@ -294,20 +294,23 @@ async function download() {
       document.fonts.ready,
       ...images.map((img) => img.decode?.().catch(() => undefined)),
     ]);
-    const canvas = await html2canvas(stage, {
+    const dataUrl = await htmlToImage.toPng(stage, {
       width: template.width,
       height: template.height,
-      scale: 2,
-      useCORS: true,
-      backgroundColor: null,
-      logging: false,
-      scrollX: 0,
-      scrollY: 0,
+      pixelRatio: 2,
+      skipAutoScale: true,
+      style: {
+        transform: 'none',
+        transformOrigin: 'top left'
+      }
     });
     const a = document.createElement("a");
-    a.href = canvas.toDataURL("image/png");
+    a.href = dataUrl;
     a.download = `snapmanner-${state.templateId}.png`;
     a.click();
+  } catch (err) {
+    console.error("Gagal mengekspor foto:", err);
+    alert("Maaf, gagal mengekspor foto.");
   } finally {
     stage.classList.remove("is-exporting");
   }
