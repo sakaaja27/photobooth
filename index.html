@@ -57,8 +57,16 @@
           <div class="slot-row" id="slotButtons"></div>
           <div class="btn-row">
             <button class="primary" id="startCamBtn" type="button">Nyalakan kamera</button>
-            <button class="ghost" id="captureBtn" type="button">Ambil 3-2-1</button>
+            <button class="ghost" id="captureBtn" type="button">Ambil Foto</button>
           </div>
+          <label class="field" style="margin-top:12px; margin-bottom:12px;">
+            Waktu hitung mundur
+            <select id="timerSelect" style="padding: 6px; border: 1px solid var(--line); font-family: Inter, sans-serif; font-size: 13px;">
+              <option value="3">3 Detik</option>
+              <option value="5">5 Detik</option>
+              <option value="10">10 Detik</option>
+            </select>
+          </label>
           <label class="upload">
             <input type="file" id="uploadInput" accept="image/*" />
             Upload dari galeri

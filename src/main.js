@@ -14,6 +14,7 @@ const captionInput = document.getElementById("captionInput");
 const countdownEl = document.getElementById("countdown");
 const uploadInput = document.getElementById("uploadInput");
 const camFeed = document.getElementById("camFeed");
+const timerSelect = document.getElementById("timerSelect");
 
 const state = {
   templateId: "snapmanner",
@@ -211,10 +212,11 @@ function captureFrame() {
 }
 
 async function captureCountdown() {
+  const seconds = parseInt(timerSelect.value, 10) || 3;
   countdownEl.hidden = false;
-  for (const n of [3, 2, 1]) {
+  for (let n = seconds; n > 0; n--) {
     countdownEl.textContent = String(n);
-    await wait(700);
+    await wait(1000);
   }
   countdownEl.hidden = true;
   captureFrame();
