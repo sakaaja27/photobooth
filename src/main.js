@@ -39,20 +39,22 @@ function currentTemplate() {
 
 function renderGallery(orient = "all") {
   templateList.innerHTML = "";
-  TEMPLATES.filter((t) => orient === "all" || t.orientation === orient).forEach((t) => {
-    const btn = document.createElement("button");
-    btn.className = `tpl${t.id === state.templateId ? " on" : ""}`;
-    btn.innerHTML = `<span class="tpl-thumb ${t.orientation}">${t.orientation === "portrait" ? "P" : "L"}</span>
+  TEMPLATES.filter((t) => orient === "all" || t.orientation === orient).forEach(
+    (t) => {
+      const btn = document.createElement("button");
+      btn.className = `tpl${t.id === state.templateId ? " on" : ""}`;
+      btn.innerHTML = `<span class="tpl-thumb ${t.orientation}">${t.orientation === "portrait" ? "P" : "L"}</span>
       <span><b>${t.name}</b><span>${t.vibe} · ${t.slots} foto</span></span>`;
-    btn.addEventListener("click", () => {
-      state.templateId = t.id;
-      state.activeSlot = 0;
-      state.shots = [];
-      renderGallery(orient);
-      mountStage();
-    });
-    templateList.appendChild(btn);
-  });
+      btn.addEventListener("click", () => {
+        state.templateId = t.id;
+        state.activeSlot = 0;
+        state.shots = [];
+        renderGallery(orient);
+        mountStage();
+      });
+      templateList.appendChild(btn);
+    },
+  );
 }
 
 function renderFilters() {
@@ -120,7 +122,9 @@ function applyFilter() {
 
 function selectSlot(index) {
   state.activeSlot = index;
-  [...slotButtons.children].forEach((b, i) => b.classList.toggle("on", i === index));
+  [...slotButtons.children].forEach((b, i) =>
+    b.classList.toggle("on", i === index),
+  );
   stage.querySelectorAll(".photo-slot").forEach((slot, i) => {
     slot.classList.toggle("active", i === index);
   });
@@ -142,14 +146,20 @@ async function startCamera() {
   stopCamera();
   try {
     state.stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: state.facingMode, width: { ideal: 1920 }, height: { ideal: 1080 } },
+      video: {
+        facingMode: state.facingMode,
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
+      },
       audio: false,
     });
     camFeed.srcObject = state.stream;
     await camFeed.play();
     attachLiveToActive();
   } catch {
-    alert("Kamera tidak bisa dibuka. Izinkan akses kamera, atau upload foto dari galeri.");
+    alert(
+      "Kamera tidak bisa dibuka. Izinkan akses kamera, atau upload foto dari galeri.",
+    );
   }
 }
 
@@ -194,7 +204,9 @@ function captureFrame() {
   state.shots[state.activeSlot] = dataUrl;
   applyShot(slot, dataUrl);
   applyFilter();
-  const nextEmpty = state.shots.findIndex((s, i) => i < currentTemplate().slots && !s);
+  const nextEmpty = state.shots.findIndex(
+    (s, i) => i < currentTemplate().slots && !s,
+  );
   if (nextEmpty >= 0) selectSlot(nextEmpty);
 }
 
@@ -247,12 +259,16 @@ function makeDraggable(el) {
   el.addEventListener("pointerup", () => {
     dragging = false;
   });
-  el.addEventListener("wheel", (e) => {
-    e.preventDefault();
-    const next = Math.max(40, el.offsetWidth + (e.deltaY > 0 ? -12 : 12));
-    el.style.width = `${next}px`;
-    el.style.height = `${next}px`;
-  }, { passive: false });
+  el.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+      const next = Math.max(40, el.offsetWidth + (e.deltaY > 0 ? -12 : 12));
+      el.style.width = `${next}px`;
+      el.style.height = `${next}px`;
+    },
+    { passive: false },
+  );
   el.addEventListener("dblclick", () => el.remove());
 }
 
@@ -270,17 +286,31 @@ function scaleStage() {
 }
 
 async function download() {
-  await document.fonts.ready;
-  const canvas = await html2canvas(stage, {
-    scale: 2,
-    useCORS: true,
-    backgroundColor: null,
-    logging: false,
-  });
-  const a = document.createElement("a");
-  a.href = canvas.toDataURL("image/png");
-  a.download = `snapmanner-${state.templateId}.png`;
-  a.click();
+  const template = currentTemplate();
+  const images = [...stage.querySelectorAll("img")];
+  stage.classList.add("is-exporting");
+  try {
+    await Promise.all([
+      document.fonts.ready,
+      ...images.map((img) => img.decode?.().catch(() => undefined)),
+    ]);
+    const canvas = await html2canvas(stage, {
+      width: template.width,
+      height: template.height,
+      scale: 2,
+      useCORS: true,
+      backgroundColor: null,
+      logging: false,
+      scrollX: 0,
+      scrollY: 0,
+    });
+    const a = document.createElement("a");
+    a.href = canvas.toDataURL("image/png");
+    a.download = `snapmanner-${state.templateId}.png`;
+    a.click();
+  } finally {
+    stage.classList.remove("is-exporting");
+  }
 }
 
 function onTextInput() {
@@ -293,12 +323,16 @@ function onTextInput() {
 document.getElementById("orientFilter").addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
-  [...e.currentTarget.children].forEach((b) => b.classList.toggle("on", b === btn));
+  [...e.currentTarget.children].forEach((b) =>
+    b.classList.toggle("on", b === btn),
+  );
   renderGallery(btn.dataset.orient);
 });
 
 document.getElementById("startCamBtn").addEventListener("click", startCamera);
-document.getElementById("captureBtn").addEventListener("click", captureCountdown);
+document
+  .getElementById("captureBtn")
+  .addEventListener("click", captureCountdown);
 document.getElementById("flipCamBtn").addEventListener("click", async () => {
   state.facingMode = state.facingMode === "user" ? "environment" : "user";
   await startCamera();
