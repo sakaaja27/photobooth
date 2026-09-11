@@ -299,6 +299,11 @@ async function download() {
       height: template.height,
       pixelRatio: 2,
       skipAutoScale: true,
+      filter: (node) => {
+        if (node.tagName === 'VIDEO') return false;
+        if (node.tagName === 'IMG' && !node.getAttribute('src')) return false;
+        return true;
+      },
       style: {
         transform: 'none',
         transformOrigin: 'top left'

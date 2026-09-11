@@ -892,6 +892,210 @@ h2 {
   font-size: 22px;
 }
 
+.squad-paper {
+  width: 794px;
+  height: 1123px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  font-family: Inter, sans-serif;
+}
+.squad-bg {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  bottom: 120px;
+  background: #8172d5;
+  border: 4px solid #f29a38;
+  border-radius: 24px;
+  overflow: hidden;
+}
+.squad-sunburst {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 200%;
+  height: 120%;
+  transform: translateX(-50%);
+  background: repeating-conic-gradient(
+    from 0deg at 50% 20%,
+    #f29a38 0deg 15deg,
+    #7bc5d4 15deg 30deg,
+    #f2d45c 30deg 45deg
+  );
+  opacity: 0.9;
+}
+.squad-content {
+  position: absolute;
+  inset: 28px;
+  display: flex;
+  flex-direction: column;
+}
+.squad-header {
+  text-align: center;
+  position: relative;
+  margin-bottom: 16px;
+}
+.squad-pill {
+  display: inline-block;
+  background: #f2d45c;
+  color: #111;
+  border: 2.5px solid #111;
+  border-radius: 99px;
+  padding: 6px 20px;
+  font-weight: 800;
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+.squad-sparkles {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle, #fff 3px, transparent 4px) 15% 25%,
+    radial-gradient(circle, #fff 4px, transparent 5px) 85% 45%,
+    radial-gradient(circle, #fff 3px, transparent 4px) 25% 85%,
+    radial-gradient(circle, #fff 4px, transparent 5px) 90% 15%;
+  background-size: 100% 100%;
+}
+.squad-title {
+  position: relative;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  line-height: 0.85;
+  text-align: center;
+  z-index: 2;
+}
+.squad-t1 {
+  display: block;
+  font-size: 125px;
+  font-weight: 900;
+  color: #f0544f;
+  text-shadow: 
+    6px 6px 0 #111,
+    -2px -2px 0 #111, 2px -2px 0 #111, -2px 2px 0 #111;
+  letter-spacing: -3px;
+  -webkit-text-stroke: 3px #111;
+}
+.squad-t2 {
+  display: inline-block;
+  background: #f2d45c;
+  color: #111;
+  border: 3px solid #111;
+  border-radius: 50%;
+  padding: 10px 32px;
+  font-size: 42px;
+  font-style: italic;
+  font-weight: 900;
+  transform: rotate(-6deg) translateY(-25px) translateX(110px);
+}
+.squad-hero {
+  height: 420px;
+  border: 4px solid #111;
+  border-radius: 28px;
+  overflow: hidden;
+  margin: 0 16px 20px;
+  background: #111;
+  box-shadow: 0 0 0 4px #f2d45c;
+}
+.squad-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 0 16px;
+  height: 260px;
+}
+.squad-slot-wrap {
+  position: relative;
+  border: 4px solid #111;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 0 0 4px #f2d45c;
+}
+.squad-slot-wrap .photo-slot {
+  height: 100%;
+}
+.squad-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #f2d45c;
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1.5px #111;
+  text-shadow: 3px 3px 0 #111;
+  transform: rotate(-8deg);
+  z-index: 5;
+  pointer-events: none;
+}
+.squad-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 16px 45px;
+  color: #111;
+  font-weight: 900;
+}
+.squad-f-bestie {
+  font-size: 58px;
+  color: #8172d5;
+  line-height: 0.8;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+.squad-f-approved {
+  display: inline-block;
+  background: #f0544f;
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 99px;
+  font-size: 26px;
+  transform: rotate(-6deg);
+}
+.squad-f-mid {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+.squad-f-right {
+  margin-bottom: 16px;
+}
+.squad-barcode {
+  width: 160px;
+  height: 54px;
+  background: repeating-linear-gradient(
+    90deg,
+    #111,
+    #111 3px,
+    transparent 3px,
+    transparent 5px,
+    #111 5px,
+    #111 9px,
+    transparent 9px,
+    transparent 12px
+  );
+  border: 1.5px solid #111;
+  margin-bottom: 6px;
+}
+.squad-barcode-text {
+  font-size: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+.squad-checker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: 
+    conic-gradient(#111 90deg, transparent 90deg 180deg, #111 180deg 270deg, transparent 270deg)
+    0 0 / 70px 70px;
+}
+
 @media (max-width: 1280px) {
   .app {
     grid-template-columns: 220px minmax(0, 1fr) 260px;

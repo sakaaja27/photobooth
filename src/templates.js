@@ -23,6 +23,16 @@ export const TEMPLATES = [
     kind: "newspaper",
   },
   {
+    id: "squad",
+    name: "Squad Goals",
+    vibe: "Retro pop art",
+    orientation: "portrait",
+    width: 794,
+    height: 1123,
+    slots: 3,
+    kind: "squad",
+  },
+  {
     id: "strip",
     name: "Seoul Strip",
     vibe: "4-cut photobox",
@@ -201,6 +211,53 @@ export function renderTemplate(template, texts) {
           <span>@snapmannerid</span>
         </footer>
       </article>`;
+  }
+
+  if (template.kind === "squad") {
+    const defaultHeadline = t.headline || "SQUAD";
+    return `<article class="paper squad-paper">
+      <div class="squad-bg">
+        <div class="squad-sunburst"></div>
+      </div>
+      <div class="squad-content">
+        <div class="squad-header">
+          <div class="squad-pill">- Archivebooth Presents -</div>
+          <div class="squad-sparkles"></div>
+          <h2 class="squad-title">
+            <span class="squad-t1" data-bind="headline">${escapeHtml(defaultHeadline)}</span>
+            <span class="squad-t2">GOALS</span>
+          </h2>
+        </div>
+        
+        <div class="squad-hero">
+          ${slotMarkup(1, ["Foto Utama"])}
+        </div>
+        
+        <div class="squad-grid">
+          <div class="squad-slot-wrap">
+             ${slotMarkup(1, ["Foto Kiri"]).replace('data-slot="0"', 'data-slot="1"')}
+             <div class="squad-badge">EXCLUSIVE<br/>DROP!</div>
+          </div>
+          <div class="squad-slot-wrap">
+             ${slotMarkup(1, ["Foto Kanan"]).replace('data-slot="0"', 'data-slot="2"')}
+          </div>
+        </div>
+        
+        <div class="squad-footer">
+          <div class="squad-f-left">
+            <div class="squad-f-bestie">BESTIE</div>
+            <div class="squad-f-approved">APPROVED</div>
+          </div>
+          <div class="squad-f-mid">AT BALIKPAPAN</div>
+          <div class="squad-f-right">
+            <div class="squad-barcode"></div>
+            <div class="squad-barcode-text">(00)123456789101112133</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="squad-checker"></div>
+    </article>`;
   }
 
   if (template.kind === "strip") {
