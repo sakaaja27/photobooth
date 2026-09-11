@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SnapManner Photobooth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=UnifrakturMaguntia&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">SM</span>
+          <div>
+            <p class="brand-kicker">Capture the Moment, Make the News</p>
+            <h1>SnapManner Photobooth</h1>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="ghost" id="flipCamBtn" type="button">Balik kamera</button>
+          <button class="ghost" id="resetBtn" type="button">Reset</button>
+          <button class="primary" id="downloadBtn" type="button">Unduh foto</button>
+        </div>
+      </header>
+
+      <aside class="rail">
+        <div class="rail-head">
+          <h2>Template</h2>
+          <div class="seg" id="orientFilter">
+            <button type="button" data-orient="all" class="on">Semua</button>
+            <button type="button" data-orient="portrait">Portrait</button>
+            <button type="button" data-orient="landscape">Landscape</button>
+          </div>
+        </div>
+        <div class="template-list" id="templateList"></div>
+      </aside>
+
+      <main class="stage-wrap">
+        <div class="stage-scroll">
+          <div class="stage-scale" id="stageScale">
+            <div class="stage" id="stage"></div>
+          </div>
+        </div>
+        <div class="countdown" id="countdown" hidden></div>
+        <video id="camFeed" playsinline muted autoplay hidden></video>
+      </main>
+
+      <aside class="tools">
+        <section>
+          <h2>Foto</h2>
+          <div class="slot-row" id="slotButtons"></div>
+          <div class="btn-row">
+            <button class="primary" id="startCamBtn" type="button">Nyalakan kamera</button>
+            <button class="ghost" id="captureBtn" type="button">Ambil 3-2-1</button>
+          </div>
+          <label class="upload">
+            <input type="file" id="uploadInput" accept="image/*" />
+            Upload dari galeri
+          </label>
+        </section>
+
+        <section id="textPanel">
+          <h2>Teks template</h2>
+          <label class="field">
+            Headline
+            <input id="headlineInput" type="text" maxlength="40" />
+          </label>
+          <label class="field">
+            Tanggal
+            <input id="dateInput" type="text" maxlength="32" />
+          </label>
+          <label class="field">
+            Caption hero
+            <input id="captionInput" type="text" maxlength="72" />
+          </label>
+        </section>
+
+        <section>
+          <h2>Filter</h2>
+          <div class="chip-grid" id="filterList"></div>
+        </section>
+
+        <section>
+          <h2>Stiker lucu</h2>
+          <p class="hint">Klik untuk pasang. Geser, scroll untuk ukuran, dobel-klik hapus.</p>
+          <div class="sticker-grid" id="stickerList"></div>
+        </section>
+      </aside>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
